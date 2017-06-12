@@ -182,8 +182,7 @@ return [
 	    \InfyOm\Generator\InfyOmGeneratorServiceProvider::class,
 	    \InfyOm\AdminLTETemplates\AdminLTETemplatesServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
-        Zizaco\Entrust\EntrustServiceProvider::class,
-
+	    \Artesaos\Defender\Providers\DefenderServiceProvider::class,
 
     ],
 
@@ -237,8 +236,7 @@ return [
 	    'Html'      => Collective\Html\HtmlFacade::class,
 	    'Flash'     => Laracasts\Flash\Flash::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-        'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
-
+	    'Defender' => \Artesaos\Defender\Facades\Defender::class,
     ],
 
 ];

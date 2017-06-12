@@ -12,8 +12,9 @@
 */
 
 Route::get('/', function () {
-	var_dump(metaphone('Catherine'));
-    return view('welcome');
+	\App\User::find(3)->detachRole(1);
+	dd(\App\User::find(3)->hasPermission('users.create'));
+	return view('welcome');
 });
 
 Auth::routes();
@@ -63,3 +64,11 @@ Route::get('sendemail', function () {
         $message->to('tieuquangmg@gmail.com', 'Jane Doe')->subject('This is a demo!');
     });
 });
+
+Route::resource('roles', 'RoleController');
+
+Route::get('attackrole/{role_id}','RoleController@getAttackRole')->name('role.attack.role');
+Route::post('attackrole/{id}','RoleController@postAttackRole')->name('role.attack.role');
+
+Route::get('attackuserpermission/{user_id}','RoleController@getAttackUserPermission')->name('user.attack.permission');
+Route::post('attackuserpermission/{id}','RoleController@postAttackUserPermission')->name('user.attack.permission');

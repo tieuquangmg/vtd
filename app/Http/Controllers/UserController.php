@@ -6,6 +6,7 @@ use App\Events\UserCreated;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Mail\News;
+use App\Models\Role;
 use App\Models\User;
 use App\Models\UserEmployeeType;
 use App\Models\UserRank;
@@ -57,7 +58,9 @@ class UserController extends AppBaseController
         $data['listUserType'] = UserEmployeeType::pluck('user_employee_type_name', 'id');
         $data['listUserStatus'] = UserStatus::pluck('user_status_name', 'id');
         $data['listUserRank'] = UserRank::pluck('user_rank_name', 'id');
-        return view('users.create')->with($data);
+	    $data['listRoles'] = Role::pluck('display_name', 'id');
+
+	    return view('users.create')->with($data);
     }
 
     /**
@@ -70,6 +73,7 @@ class UserController extends AppBaseController
     public function store(CreateUserRequest $request)
     {
         $input = $request->all();
+//        dd($input);
         $input['start_date'] = Carbon::createFromFormat('d/m/Y', $input['start_date']);
         $input['password'] = Hash::make($input['password']);
         $input['contract_date_end'] = Carbon::createFromFormat('d/m/Y', $input['contract_date_end']);
@@ -82,7 +86,7 @@ class UserController extends AppBaseController
             $input['contract_file'] = $path . $filename;
         }
         $user = $this->userRepository->create($input);
-
+		$user->attachRole($input['roles']);
         Flash::success('Tài khoản được tạo thành công.');
         event(new UserCreated($user->id));
         return redirect(route('users.index'));
