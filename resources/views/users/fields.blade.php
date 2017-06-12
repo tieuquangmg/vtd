@@ -93,7 +93,7 @@
 
 <div class="form-group">
     {!! Form::label('roles', 'Loại tài khoản',['class'=>'col-md-3']) !!}
-    {!! Form::select('roles[]', $listRoles, null, ['multiple'=>true,'class' => 'col-md-6']) !!}
+    {!! Form::select('roles[]', $listRoles, $user_roles, ['multiple'=>true,'class' => 'col-md-6']) !!}
 </div>
 <!-- Submit Field -->
 <div class="form-group">

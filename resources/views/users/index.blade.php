@@ -4,8 +4,9 @@
     <section class="content-header">
         <h1 class="pull-left">Danh sách tài khoản</h1>
         <h1 class="pull-right">
-           <a class="btn btn-sm btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('users.create') !!}">Thêm mới</a>
-			<a class="btn btn-sm btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px; margin-right: 5px" href="{!! route('users.export') !!}"><i class="glyphicon glyphicon-export"></i>Xuất Excel</a>
+            <a class="btn btn-sm btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('users.create') !!}">Thêm mới</a>
+			<a class="btn btn-sm btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px; margin-right: 5px" href="{!! route('users.export') !!}">
+                <i class="glyphicon glyphicon-export"></i>Xuất Excel</a>
 		</h1>
     </section>
     <div class="content">

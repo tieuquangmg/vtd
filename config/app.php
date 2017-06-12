@@ -183,7 +183,7 @@ return [
 	    \InfyOm\AdminLTETemplates\AdminLTETemplatesServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
 	    \Artesaos\Defender\Providers\DefenderServiceProvider::class,
-
+        Barryvdh\Debugbar\ServiceProvider::class,
     ],
 
     /*

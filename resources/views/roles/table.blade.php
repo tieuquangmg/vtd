@@ -1,12 +1,12 @@
 <table class="table table-responsive" id="roles-table">
     <thead>
-        <th>Name</th>
-        <th colspan="3">Action</th>
+        <th>Tên vai trò</th>
+        <th colspan="3">Xem quyền</th>
     </thead>
     <tbody>
     @foreach($roles as $role)
         <tr>
-            <td>{!! $role->name !!}</td>
+            <td>{!! $role->display_name !!}</td>
             <td>
                 {!! Form::open(['route' => ['roles.destroy', $role->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

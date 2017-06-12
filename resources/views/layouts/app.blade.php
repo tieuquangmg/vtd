@@ -353,15 +353,16 @@
 
     <!-- AdminLTE App -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.11/js/app.min.js"></script>
+
+    <script src="{{asset("/")}}js/check_all.js"></script>
     <script>
         $(function () {
 			$('.datepicker').datepicker({
 				autoclose: true,
                 language: 'vi-VN'
-			});
+            });
 		});
     </script>
-
     @yield('scripts')
 </body>
 </html>

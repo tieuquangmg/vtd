@@ -124,8 +124,9 @@ class UserController extends AppBaseController
         $data['listUserType'] = UserEmployeeType::pluck('user_employee_type_name', 'id');
         $data['listUserStatus'] = UserStatus::pluck('user_status_name', 'id');
         $data['listUserRank'] = UserRank::pluck('user_rank_name', 'id');
+        $data['listRoles'] = Role::pluck('display_name', 'id');
         $user = $this->userRepository->findWithoutFail($id);
-
+        $data['user_roles'] = $user->roles->pluck('id');
         if (empty($user)) {
             Flash::error('User not found');
             return redirect(route('users.index'));
@@ -154,7 +155,7 @@ class UserController extends AppBaseController
         $input = $request->all();
         $input['start_date'] = Carbon::createFromFormat('d/m/Y', $input['start_date']);
         $input['password'] = Hash::make($input['password']);
-        $input['contract_date_end'] = Carbon::createFromFormat('d/m/Y', $input['contract_date_end']);
+        $input['contract_date_end'] = ( $input['contract_date_end'] != null) ? (Carbon::createFromFormat('d/m/Y', $input['contract_date_end'])) : null;
 
         if ($request->hasFile('contract_file')) {
             $filename = str_slug($input['full_name'], '_') . '.' . $request->file('contract_file')->getClientOriginalExtension();
@@ -163,12 +164,11 @@ class UserController extends AppBaseController
             $request->file('contract_file')->move($path, $filename);
             $input['contract_file'] = $path . $filename;
         }
+
         $user = $this->userRepository->update($input, $id);
         Flash::success('Tài khoản đã được cập nhật');
-
-        Mail::to('tieuquangmg@gmail.com')->send(new News());
-
-
+//        Mail::to('tieuquangmg@gmail.com')->send(new News());
+        event(new UserCreated($user->id));
         return redirect(route('users.index'));
     }
 

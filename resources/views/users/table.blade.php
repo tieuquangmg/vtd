@@ -1,6 +1,9 @@
 <table class="table table-responsive table-striped" id="users-table">
     <thead>
     <tr>
+        <th>
+            <input type="checkbox" id="check_all">
+        </th>
         <th>Họ và tên</th>
         <th>Tên đăng nhập</th>
         {{--<th>Email</th>--}}
@@ -17,6 +20,9 @@
     <tbody>
     @foreach($users as $user)
         <tr>
+            <td class="a-center">
+                <input type="checkbox" class="check" name="check[]" value="{{$user->id}}">
+            </td>
             <td><b><a href="{!! route('users.show', [$user->id]) !!}">{!! $user->full_name !!}</a></b></td>
             <td>{!! $user->name !!}</td>
             {{--<td>{!! $user->email !!}</td>--}}
