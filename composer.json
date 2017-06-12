@@ -13,7 +13,7 @@
 		"infyomlabs/adminlte-templates": "5.4.x-dev",
         "doctrine/dbal": "~2.3",
         "maatwebsite/excel": "~2.1.0",
-        "zizaco/entrust": "5.2.x-dev"
+        "artesaos/defender": "~0.6"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
