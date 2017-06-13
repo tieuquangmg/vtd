@@ -9,18 +9,22 @@
     <div class="content">
         @include('adminlte-templates::common.errors')
         <div class="box box-primary">
+            {!! Form::open(['route' => 'users.store','class' => 'form-horizontal','files' => true]) !!}
 
-            <div class="box-body">
-                <div class="row">
-                    <div class="col-md-6 col-md-offset-3">
-                        {!! Form::open(['route' => 'users.store','class' => 'form-horizontal','files' => true]) !!}
-
-                        @include('users.fields')
-
-                        {!! Form::close() !!}
+            <div class="box-header">
+                <div class="pull-right">
+                    <!-- Submit Field -->
+                    <div class="form-group">
+                        {!! Form::submit( Request::is('*edit')? 'Cập nhật' : 'Tạo tài khoản', ['class' => 'btn btn-primary']) !!}
+                        <a href="{!! route('users.index') !!}" class="btn btn-danger">Hủy</a>
                     </div>
                 </div>
             </div>
+            <div class="box-body">
+                @include('users.fields')
+            </div>
+            {!! Form::close() !!}
+
         </div>
     </div>
 @endsection

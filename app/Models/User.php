@@ -35,11 +35,21 @@ class User extends Authenticatable
         'user_employee_type_id',
         'user_rank_id',
         'user_status_id',
-        'bank_acc',
         'contract_date_end',
         'contract_file',
         'address',
-        'permanent_address'
+        'permanent_address',
+        'birthday',
+        'card_id',
+        'card_date',
+        'card_location',
+        'bank_id',
+        'bank_acc',
+        'bank_location',
+        'salary',
+        'bike_no',
+        'deleted_at'
+
     ];
 
     /**
@@ -79,7 +89,10 @@ class User extends Authenticatable
         'contract_date_end' => '',
         'contract_file' => '',
         'address' => '',
-        'permanent_address' => ''
+        'permanent_address' => '',
+
+
+        'roles'=>'required'
     ];
     public static $rules_update = [
         'full_name' => 'required',

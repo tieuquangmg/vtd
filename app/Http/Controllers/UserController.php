@@ -16,6 +16,7 @@ use App\Http\Controllers\AppBaseController;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -59,7 +60,7 @@ class UserController extends AppBaseController
         $data['listUserStatus'] = UserStatus::pluck('user_status_name', 'id');
         $data['listUserRank'] = UserRank::pluck('user_rank_name', 'id');
 	    $data['listRoles'] = Role::pluck('display_name', 'id');
-
+	    $data['listBank'] = collect();
 	    return view('users.create')->with($data);
     }
 

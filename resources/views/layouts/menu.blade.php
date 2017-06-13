@@ -1,4 +1,39 @@
 <li class="treeview <?php if(Request::is('users*') or Request::is('addUser*') or Request::is('userEmployeeTypes*')or Request::is('userRanks*')or Request::is('userStatuses*') )echo "active"; ?>">
+    <a href="http://wiki.vtdvn.net/">
+        <i class="fa fa-dashboard"></i>
+        <span>Vtd Wiki</span>
+    </a>
+</li>
+<li class="treeview <?php if(Request::is('users*') or Request::is('addUser*') or Request::is('userEmployeeTypes*')or Request::is('userRanks*')or Request::is('userStatuses*') )echo "active"; ?>">
+    <a href="http://forum.vtdvn.net">
+        <i class="fa fa-dashboard"></i>
+        <span>Forum</span>
+    </a>
+</li>
+<li class="treeview <?php if(Request::is('devices*') or Request::is('devices/create*') or Request::is('deviceStatuses*') )echo "active"; ?>">
+    <a href="#">
+        <i class="fa fa-dashboard"></i>
+        <span>Quản lý tài liệu</span>
+        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+        </span>
+    </a>
+    <ul class="treeview-menu">
+        <li class="{{ Request::is('users*') ? 'active' : '' }}">
+            <a href="{!! route('users.index') !!}"><i class="fa fa-edit"></i><span>Danh sách</span></a>
+        </li>
+        <li class="{{ Request::is('addUser*') ? 'active' : '' }}">
+            <a href="{!! route('users.create') !!}"><i class="fa fa-edit"></i><span>Tạo tài liệu mới</span></a>
+        </li>
+        <li class="{{ Request::is('addUser*') ? 'active' : '' }}">
+            <a href="{!! route('users.create') !!}"><i class="fa fa-edit"></i><span>Danh sách Server</span></a>
+        </li>
+        <li class="{{ Request::is('addUser*') ? 'active' : '' }}">
+            <a href="{!! route('users.create') !!}"><i class="fa fa-edit"></i><span>Tạo Server</span></a>
+        </li>
+    </ul>
+</li>
+<li class="treeview <?php if(Request::is('users*') or Request::is('addUser*') or Request::is('userEmployeeTypes*')or Request::is('userRanks*')or Request::is('userStatuses*') )echo "active"; ?>">
     <a href="#">
         <i class="fa fa-dashboard"></i>
         <span>Quản lý tài khoản</span>
