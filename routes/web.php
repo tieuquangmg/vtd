@@ -12,8 +12,8 @@
 */
 
 Route::get('/', function () {
-	\App\User::find(3)->detachRole(1);
-	dd(\App\User::find(3)->hasPermission('users.create'));
+//	\App\User::find(3)->detachRole(1);
+//	dd(\App\User::find(3)->hasPermission('users.create'));
 	return view('welcome');
 });
 

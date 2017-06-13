@@ -16,6 +16,11 @@
 
         <div class="clearfix"></div>
         <div class="box box-primary">
+			<div class="box-header">
+				<div class="pull-left">
+					<a class="btn btn-danger btn-sm">gửi email</a>
+				</div>
+			</div>
             <div class="box-body">
                     @include('users.table')
             </div>
