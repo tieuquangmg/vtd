@@ -21,7 +21,7 @@
     @foreach($users as $user)
         <tr>
             <td class="a-center">
-                <input type="checkbox" class="check" name="check[]" value="{{$user->id}}">
+                <input form="email" type="checkbox" class="check" name="check[]" value="{{$user->id}}">
             </td>
             <td><b><a href="{!! route('users.show', [$user->id]) !!}">{!! $user->full_name !!}</a></b></td>
             <td>{!! $user->name !!}</td>

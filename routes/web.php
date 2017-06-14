@@ -12,8 +12,9 @@
 */
 
 Route::get('/', function () {
-//	\App\User::find(3)->detachRole(1);
-//	dd(\App\User::find(3)->hasPermission('users.create'));
+	$user = \App\User::find(3);
+	$roles = [1, 2, 3]; // Using an array of ids
+	$user->attachRole($roles);
 	return view('welcome');
 });
 
@@ -72,3 +73,7 @@ Route::post('attackrole/{id}','RoleController@postAttackRole')->name('role.attac
 
 Route::get('attackuserpermission/{user_id}','RoleController@getAttackUserPermission')->name('user.attack.permission');
 Route::post('attackuserpermission/{id}','RoleController@postAttackUserPermission')->name('user.attack.permission');
+Route::post('email',function (){
+	dd(\Illuminate\Support\Facades\Request::all());
+})->name('sendemail');
+Route::resource('banks', 'BankController');

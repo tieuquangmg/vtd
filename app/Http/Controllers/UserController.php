@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\UserEmployeeType;
 use App\Models\UserRank;
 use App\Models\UserStatus;
+use App\Repositories\BankRepository;
 use App\Repositories\UserRepository;
 use App\Http\Controllers\AppBaseController;
 use Carbon\Carbon;
@@ -27,11 +28,13 @@ use Maatwebsite\Excel\Facades\Excel;
 class UserController extends AppBaseController
 {
     /** @var  UserRepository */
-    private $userRepository;
+    private $userRepository, $bankReponsitory;
 
-    public function __construct(UserRepository $userRepo)
+    public function __construct(UserRepository $userRepo,BankRepository $bankrepon)
     {
         $this->userRepository = $userRepo;
+        $this->bankReponsitory = $bankrepon;
+
     }
 
     /**
@@ -60,7 +63,7 @@ class UserController extends AppBaseController
         $data['listUserStatus'] = UserStatus::pluck('user_status_name', 'id');
         $data['listUserRank'] = UserRank::pluck('user_rank_name', 'id');
 	    $data['listRoles'] = Role::pluck('display_name', 'id');
-	    $data['listBank'] = collect();
+	    $data['listBank'] = $this->bankReponsitory->pluck('name','id');
 	    return view('users.create')->with($data);
     }
 
@@ -77,7 +80,15 @@ class UserController extends AppBaseController
 //        dd($input);
         $input['start_date'] = Carbon::createFromFormat('d/m/Y', $input['start_date']);
         $input['password'] = Hash::make($input['password']);
+	    if($input['contract_date_end'] != null){
         $input['contract_date_end'] = Carbon::createFromFormat('d/m/Y', $input['contract_date_end']);
+	    }
+	    if($input['birthday'] != null){
+        	$input['birthday'] = Carbon::createFromFormat('d/m/Y', $input['birthday']);
+        }
+	    if($input['card_date'] != null){
+		    $input['card_date'] = Carbon::createFromFormat('d/m/Y', $input['card_date']);
+	    }
         $input['contract_file'] = null;
         if ($request->hasFile('contract_file')) {
             $filename = str_slug($input['full_name'], '_') . '.' . $request->file('contract_file')->getClientOriginalExtension();
@@ -87,7 +98,8 @@ class UserController extends AppBaseController
             $input['contract_file'] = $path . $filename;
         }
         $user = $this->userRepository->create($input);
-		$user->attachRole($input['roles']);
+//        $roles = Role::whereIn('id',$input['roles'])->get();
+		$user->syncRoles($input['roles']);
         Flash::success('Tài khoản được tạo thành công.');
         event(new UserCreated($user->id));
         return redirect(route('users.index'));
@@ -128,7 +140,9 @@ class UserController extends AppBaseController
         $data['listRoles'] = Role::pluck('display_name', 'id');
         $user = $this->userRepository->findWithoutFail($id);
         $data['user_roles'] = $user->roles->pluck('id');
-        if (empty($user)) {
+	    $data['listBank'] = $this->bankReponsitory->pluck('name','id');
+
+	    if (empty($user)) {
             Flash::error('User not found');
             return redirect(route('users.index'));
         }
@@ -157,7 +171,12 @@ class UserController extends AppBaseController
         $input['start_date'] = Carbon::createFromFormat('d/m/Y', $input['start_date']);
         $input['password'] = Hash::make($input['password']);
         $input['contract_date_end'] = ( $input['contract_date_end'] != null) ? (Carbon::createFromFormat('d/m/Y', $input['contract_date_end'])) : null;
-
+	    if($input['birthday'] != null){
+		    $input['birthday'] = Carbon::createFromFormat('d/m/Y', $input['birthday']);
+	    }
+	    if($input['card_date'] != null){
+		    $input['card_date'] = Carbon::createFromFormat('d/m/Y', $input['card_date']);
+	    }
         if ($request->hasFile('contract_file')) {
             $filename = str_slug($input['full_name'], '_') . '.' . $request->file('contract_file')->getClientOriginalExtension();
             $path = 'upload/contracts/' . $input['name'] . '/';

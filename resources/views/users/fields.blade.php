@@ -90,7 +90,7 @@
 
     <div class="form-group">
         {!! Form::label('roles', 'Loại tài khoản',['class'=>'col-md-3 col-xs-4 required-input']) !!}
-        {!! Form::select('roles[]', $listRoles, Request::is('*edit')? $user_roles : null, ['multiple'=>true,'class' => 'col-md-6 col-xs-8']) !!}
+        {!! Form::select('roles[]', $listRoles, Request::is('*edit')? $user_roles : old('roles'), ['multiple'=>true,'class' => 'col-md-6 col-xs-8']) !!}
     </div>
     {{--ngày sinh--}}
     <div class="form-group">
@@ -99,7 +99,7 @@
             <div class="input-group-addon">
                 <i class="fa fa-calendar"></i>
             </div>
-            {!! Form::text('birthday', (Request::is('*edit'))? $user->birthday->format('d/m/Y') : null, ['class' => 'form-control datepicker','id'=>'datepicker']) !!}
+            {!! Form::text('birthday', (Request::is('*edit') && $user->birthday != null)? $user->birthday->format('d/m/Y') : null, ['class' => 'form-control datepicker','id'=>'datepicker']) !!}
         </div>
     </div>
     {{--so cmt--}}
@@ -114,7 +114,7 @@
             <div class="input-group-addon">
                 <i class="fa fa-calendar"></i>
             </div>
-            {!! Form::text('card_date', (Request::is('*edit'))? $user->card_date->format('d/m/Y') : null, ['class' => 'form-control datepicker','id'=>'datepicker']) !!}
+            {!! Form::text('card_date', (Request::is('*edit') && $user->card_date != null)? $user->card_date->format('d/m/Y') : null, ['class' => 'form-control datepicker','id'=>'datepicker']) !!}
         </div>
     </div>
     {{--nơi cấp--}}
