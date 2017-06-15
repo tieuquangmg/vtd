@@ -216,8 +216,9 @@ class UserController extends AppBaseController
         return redirect(route('users.index'));
     }
 
-    public function getExportExcel()
+    public function postExportExcel(Request $request)
     {
+        dd($request);
         $datas = User::all();
         $fileName = "Danh sách Tài khoản - " . Carbon::now()->format('d_m_Y_h_i_s');
         Excel::create($fileName, function ($excel) use ($datas) {

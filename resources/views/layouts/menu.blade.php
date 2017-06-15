@@ -57,9 +57,12 @@
         <li class="{{ Request::is('userStatuses*') ? 'active' : '' }}">
             <a href="{!! route('userStatuses.index') !!}"><i class="fa fa-edit"></i><span>Trạng thái nhân viên</span></a>
         </li>
+        <li class="{{ Request::is('banks*') ? 'active' : '' }}">
+            <a href="{!! route('banks.index') !!}"><i class="fa fa-edit"></i><span>Banks</span></a>
+        </li>
     </ul>
 </li>
-<li class="treeview <?php if(Request::is('devices*') or Request::is('devices/create*') or Request::is('deviceStatuses*') )echo "active"; ?>">
+<li class="treeview <?php if(Request::is('devices*') or Request::is('devices/create*') or Request::is('deviceStatuses*') or Request::is('deviceSuppliers*') or Request::is('deviceBrands*'))echo "active"; ?>">
     <a href="#">
         <i class="fa fa-dashboard"></i>
         <span>Quản lý thiết bị</span>
@@ -77,6 +80,12 @@
         <li class="{{ Request::is('deviceStatuses*') ? 'active' : '' }}">
             <a href="{!! route('deviceStatuses.index') !!}"><i class="fa fa-edit"></i><span>Trang thái thiết bị</span></a>
         </li>
+        <li class="{{ Request::is('deviceSuppliers*') ? 'active' : '' }}">
+            <a href="{!! route('deviceSuppliers.index') !!}"><i class="fa fa-edit"></i><span>Nhà cung cấp</span></a>
+        </li>
+        <li class="{{ Request::is('deviceBrands*') ? 'active' : '' }}">
+            <a href="{!! route('deviceBrands.index') !!}"><i class="fa fa-edit"></i><span>Hãng sản xuất</span></a>
+        </li>
     </ul>
 </li>
 <li>
@@ -89,9 +98,6 @@
     <ul class="treeview-menu" style="display: none;">
         <li class="{{ Request::is('servers*') ? 'active' : '' }}">
             <a href="{!! route('servers.index') !!}"><i class="fa fa-edit"></i><span>Danh sách</span></a>
-        </li>
-        <li class="{{ Request::is('deviceBrands*') ? 'active' : '' }}">
-            <a href="{!! route('deviceBrands.index') !!}"><i class="fa fa-edit"></i><span>Hãng sản xuất</span></a>
         </li>
         <li class="{{ Request::is('serverStatuses*') ? 'active' : '' }}">
             <a href="{!! route('serverStatuses.index') !!}"><i class="fa fa-edit"></i><span>Trạng thái server</span></a>
@@ -152,8 +158,23 @@
 <li class="{{ Request::is('roles*') ? 'active' : '' }}">
     <a href="{!! route('roles.index') !!}"><i class="fa fa-edit"></i><span>Roles</span></a>
 </li>
-
-<li class="{{ Request::is('banks*') ? 'active' : '' }}">
-    <a href="{!! route('banks.index') !!}"><i class="fa fa-edit"></i><span>Banks</span></a>
+<li>
+<li class="treeview <?php if (Request::is('absences/create*') or Request::is('absences') or Request::is('absenceTypes*') or Request::is('absenceStatuses*') or Request::is('userDetails*') or Request::is('years*')) echo "active"; ?>">
+    <a href="#">
+        <i class="fa fa-dashboard"></i>
+        <span>Quản lý tài liệu</span>
+        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+        </span>
+    </a>
+    <ul class="treeview-menu">
+        <li class="{{ Request::is('doccuments*') ? 'active' : '' }}">
+            <a href="{!! route('doccuments.index') !!}"><i class="fa fa-edit"></i><span>Tài liệu</span></a>
+        </li>
+        <li class="{{ Request::is('doccumentServes*') ? 'active' : '' }}">
+            <a href="{!! route('doccumentServes.index') !!}"><i class="fa fa-edit"></i><span>Tài liệu serve</span></a>
+        </li>
+    </ul>
 </li>
+
 

@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateDeviceRequest;
 use App\Models\Device;
 use App\Models\DeviceStatus;
 use App\Models\User;
+use App\Repositories\Device_supplierRepository;
 use App\Repositories\DeviceRepository;
 use App\Http\Controllers\AppBaseController;
 use Carbon\Carbon;
@@ -20,10 +21,12 @@ class DeviceController extends AppBaseController
 {
     /** @var  DeviceRepository */
     private $deviceRepository;
+    private $suppliterRes;
 
-    public function __construct(DeviceRepository $deviceRepo)
+    public function __construct(DeviceRepository $deviceRepo,Device_supplierRepository $suppliterRes)
     {
         $this->deviceRepository = $deviceRepo;
+        $this->suppliterRes = $suppliterRes;
     }
 
     /**
@@ -50,6 +53,7 @@ class DeviceController extends AppBaseController
     {
     	$data['userList'] = User::pluck('full_name','id');
     	$data['statuslist'] = DeviceStatus::pluck('device_status_name','id');
+    	$data['supplier'] = $this->suppliterRes->pluck('name','id');
         return view('devices.create')->with($data);
     }
 
@@ -112,6 +116,7 @@ class DeviceController extends AppBaseController
         }
 	    $data['userList'] = User::pluck('full_name','id');
 	    $data['statuslist'] = DeviceStatus::pluck('device_status_name','id');
+        $data['supplier'] = $this->suppliterRes->pluck('name','id');
         return view('devices.edit')->with('device', $device)->with($data);
     }
 

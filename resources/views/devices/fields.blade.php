@@ -23,6 +23,11 @@
 
 </div>
 
+<div class="form-group col-sm-6">
+    {!! Form::label('supplier_id', 'Nhà cung cấp') !!}
+    {!! Form::select('supplier_id',$supplier, old('supplier_id'), ['class' => 'form-control'])!!}
+</div>
+
 <!-- Date Guarantee End Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('date_guarantee_end', 'Ngày hết bảo hành:') !!}

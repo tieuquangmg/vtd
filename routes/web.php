@@ -12,9 +12,9 @@
 */
 
 Route::get('/', function () {
-	$user = \App\User::find(3);
-	$roles = [1, 2, 3]; // Using an array of ids
-	$user->attachRole($roles);
+//	$user = \App\User::find(3);
+//	$roles = [1, 2, 3]; // Using an array of ids
+//	$user->attachRole($roles);
 	return view('welcome');
 });
 
@@ -77,3 +77,9 @@ Route::post('email',function (){
 	dd(\Illuminate\Support\Facades\Request::all());
 })->name('sendemail');
 Route::resource('banks', 'BankController');
+
+Route::resource('deviceSuppliers', 'Device_supplierController');
+
+Route::resource('doccuments', 'DoccumentsController');
+
+Route::resource('doccumentServes', 'Doccument_serveController');
