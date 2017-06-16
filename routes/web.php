@@ -55,7 +55,7 @@ Route::get('showuserLeaves/{id}','UserLeaveController@userLeavesDetail')->name('
 
 Route::get('devicesExport','DeviceController@getExport')->name('devices.export');
 
-Route::get('user/export-excel','UserController@getExportExcel')->name('users.export');
+Route::post('user/export-excel','UserController@postExportExcel')->name('users.export');
 
 
 

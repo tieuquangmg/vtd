@@ -218,8 +218,9 @@ class UserController extends AppBaseController
 
     public function postExportExcel(Request $request)
     {
-        dd($request);
-        $datas = User::all();
+    	$datas = ['0'=>['phan văn Quang'=>'dfsdfsdf'],'2'=>['phan văn Quang'=>'dfsdfsdf']];
+	    $colums = $request->all()['colums'];
+        $datas = User::select($colums)->get()->toArray();
         $fileName = "Danh sách Tài khoản - " . Carbon::now()->format('d_m_Y_h_i_s');
         Excel::create($fileName, function ($excel) use ($datas) {
 
@@ -233,13 +234,12 @@ class UserController extends AppBaseController
             // Call them separately
             $excel->setDescription('Danh sách tài khoản');
             $excel->sheet('Sheet1', function ($sheet) use ($datas) {
-                $sheet->cell('A1:Z1', function ($row) {
+                $sheet->cell('A1:C1', function ($row) {
 
                     // call cell manipulation methods
                     $row->setBackground('#00E4FF');
-
                 });
-                $sheet->fromModel($datas);
+                $sheet->fromArray($datas, null, 'A1', false);
             });
         })->export('xlsx');
     }

@@ -5,7 +5,7 @@
  */
 
 $.extend($.ui.multiselect.locale, {
-	addAll:'Add all',
-	removeAll:'Remove all',
-	itemsCount:'items selected'
+	addAll:'Chọn tất cả',
+	removeAll:'Bỏ chọn tất cả',
+	itemsCount:'Cột đã chọn'
 });
