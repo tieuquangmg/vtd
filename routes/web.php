@@ -12,6 +12,7 @@
 */
 
 Route::get('/', function () {
+    dd(\App\Models\User_email::first()->email_to_user);
 //	$user = \App\User::find(3);
 //	$roles = [1, 2, 3]; // Using an array of ids
 //	$user->attachRole($roles);
@@ -73,9 +74,7 @@ Route::post('attackrole/{id}','RoleController@postAttackRole')->name('role.attac
 
 Route::get('attackuserpermission/{user_id}','RoleController@getAttackUserPermission')->name('user.attack.permission');
 Route::post('attackuserpermission/{id}','RoleController@postAttackUserPermission')->name('user.attack.permission');
-Route::post('email',function (){
-	dd(\Illuminate\Support\Facades\Request::all());
-})->name('sendemail');
+Route::post('send-email','UserController@postSendEmail')->name('sendemail');
 Route::resource('banks', 'BankController');
 
 Route::resource('deviceSuppliers', 'Device_supplierController');
@@ -83,3 +82,5 @@ Route::resource('deviceSuppliers', 'Device_supplierController');
 Route::resource('doccuments', 'DoccumentsController');
 
 Route::resource('doccumentServes', 'Doccument_serveController');
+
+Route::resource('userEmails', 'User_emailController');

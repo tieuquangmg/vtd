@@ -218,7 +218,6 @@ class UserController extends AppBaseController
 
     public function postExportExcel(Request $request)
     {
-    	$datas = ['0'=>['phan văn Quang'=>'dfsdfsdf'],'2'=>['phan văn Quang'=>'dfsdfsdf']];
 	    $colums = $request->all()['colums'];
         $datas = User::select($colums)->get()->toArray();
         $fileName = "Danh sách Tài khoản - " . Carbon::now()->format('d_m_Y_h_i_s');
@@ -242,5 +241,10 @@ class UserController extends AppBaseController
                 $sheet->fromArray($datas, null, 'A1', false);
             });
         })->export('xlsx');
+    }
+
+    public function postSendEmail(Request $request){
+        $data['users'] = User::whereIn('id',$request->all()['check'])->get();
+        return view('user_emails.create')->with($data);
     }
 }

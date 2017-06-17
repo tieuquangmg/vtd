@@ -178,3 +178,7 @@
 </li>
 
 
+<li class="{{ Request::is('userEmails*') ? 'active' : '' }}">
+    <a href="{!! route('userEmails.index') !!}"><i class="fa fa-edit"></i><span>User_emails</span></a>
+</li>
+
