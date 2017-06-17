@@ -187,7 +187,6 @@ class UserController extends AppBaseController
 
         $user = $this->userRepository->update($input, $id);
         Flash::success('Tài khoản đã được cập nhật');
-//        Mail::to('tieuquangmg@gmail.com')->send(new News());
         event(new UserCreated($user->id));
         return redirect(route('users.index'));
     }
@@ -242,9 +241,11 @@ class UserController extends AppBaseController
             });
         })->export('xlsx');
     }
-
+	public  function postCreateEmail(Request $request){
+		$data['users'] = User::whereIn('id',$request->all()['check'])->get();
+		return view('user_emails.create')->with($data);
+	}
     public function postSendEmail(Request $request){
-        $data['users'] = User::whereIn('id',$request->all()['check'])->get();
-        return view('user_emails.create')->with($data);
+
     }
 }

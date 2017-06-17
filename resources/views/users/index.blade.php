@@ -29,7 +29,7 @@
 		<div class="box box-primary">
 			<div class="box-header">
 				<div class="pull-left">
-					<form method="post" action="{{route('sendemail')}}" id="email">
+					<form method="post" action="{{route('createemail')}}" id="email">
 						{!! csrf_field() !!}
 						<input class="btn btn-danger btn-sm" type="submit" value="gửi email">
 					</form>
