@@ -2,9 +2,9 @@
 
 @section('content')
     <section class="content-header">
-        <h1>
-            User Email
-        </h1>
+        <h2>
+            Gửi email
+        </h2>
     </section>
     <div class="content">
         @include('adminlte-templates::common.errors')
@@ -22,3 +22,9 @@
         </div>
     </div>
 @endsection
+@section('scripts')
+    <script type="text/javascript" src="{{asset('/')}}themes/plugins/ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace( 'ckeditor' );
+    </script>
+    @endsection

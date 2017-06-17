@@ -7,7 +7,7 @@
 
 <!-- Email To User Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('email_to_user_id', 'Email To User Id:') !!}
+    {!! Form::label('email_to_user_id', 'Người nhận:') !!}
     @foreach($users as $user)
     {!! Form::hidden('email_to_user_id[]', $user->id, ['class' => 'form-control']) !!}
     @endforeach
@@ -19,7 +19,7 @@
 <!-- Content Field -->
 <div class="form-group col-sm-12 col-lg-12">
     {!! Form::label('content', 'Content:') !!}
-    {!! Form::textarea('content', null, ['class' => 'form-control']) !!}
+    {!! Form::textarea('content', null, ['class' => 'form-control','id'=>'ckeditor']) !!}
 </div>
 
 <!-- Status Field -->

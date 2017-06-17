@@ -16,6 +16,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\UserCreated' => [
             'App\Listeners\UserLeaveListener',
         ],
+        'App\Events\Sendemail' => [
+            'App\Listeners\UserLeaveListener',
+        ]
     ];
 
     /**
