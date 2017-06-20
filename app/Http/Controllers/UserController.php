@@ -6,6 +6,7 @@ use App\Events\UserCreated;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Mail\News;
+use App\Mail\SendMail;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\UserEmployeeType;
@@ -246,6 +247,14 @@ class UserController extends AppBaseController
 		return view('user_emails.create')->with($data);
 	}
     public function postSendEmail(Request $request){
-
+	    $data = $request->all();
+        $users = User::whereIn('id',$data['email_to_user_id'])->get();
+        foreach ($users as $user) {
+            if ($user->email != null) {
+                Mail::to($user->email)->queue(new SendMail($user,$data));
+			}
+        }
+        Flash::success('Mail đã được gửi đi');
+        return redirect()->route('users.index');
     }
 }

@@ -12,7 +12,7 @@
 
             <div class="box-body">
                 <div class="row">
-                    {!! Form::open(['route' => 'userEmails.store']) !!}
+                    {!! Form::open(['route' => 'send.email']) !!}
 
                         @include('user_emails.fields')
 

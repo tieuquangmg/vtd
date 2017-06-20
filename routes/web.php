@@ -74,8 +74,8 @@ Route::post('attackrole/{id}','RoleController@postAttackRole')->name('role.attac
 
 Route::get('attackuserpermission/{user_id}','RoleController@getAttackUserPermission')->name('user.attack.permission');
 Route::post('attackuserpermission/{id}','RoleController@postAttackUserPermission')->name('user.attack.permission');
-Route::post('send-email','UserController@postCreateEmail')->name('createemail');
-Route::post('send-email','UserController@postSendEmail')->name('sendemail');
+Route::post('create-email','UserController@postCreateEmail')->name('createemail');
+Route::post('send-email','UserController@postSendEmail')->name('send.email');
 Route::resource('banks', 'BankController');
 
 Route::resource('deviceSuppliers', 'Device_supplierController');

@@ -16,9 +16,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\UserCreated' => [
             'App\Listeners\UserLeaveListener',
         ],
-        'App\Events\SendEmail' => [
-            'App\Listeners\UserLeaveListener',
-        ],
+//        'App\Events\SendEmail' => [
+//            'App\Listeners\UserLeaveListener',
+//        ],
 	    'Illuminate\Mail\Events\MessageSending' => [
 		    'App\Listeners\LogSentMessage',
 	    ],
