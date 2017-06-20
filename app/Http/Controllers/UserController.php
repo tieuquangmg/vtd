@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\UserCreated;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Jobs\SendReminderEmail;
 use App\Mail\News;
 use App\Mail\SendMail;
 use App\Models\Role;
@@ -251,7 +252,9 @@ class UserController extends AppBaseController
         $users = User::whereIn('id',$data['email_to_user_id'])->get();
         foreach ($users as $user) {
             if ($user->email != null) {
-                Mail::to($user->email)->queue(new SendMail($user,$data));
+                 $job = (new SendReminderEmail($user, $data))
+                            ->delay(Carbon::now()->addMinutes(1));
+                dispatch($job);
 			}
         }
         Flash::success('Mail đã được gửi đi');
