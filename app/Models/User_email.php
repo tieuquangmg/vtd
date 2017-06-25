@@ -52,6 +52,7 @@ class User_email extends \Illuminate\Database\Eloquent\Model
     ];
 
     public function email_to_user(){
-        return $this->belongsToMany(User::class,'email_to_user','email_id','user_id');
+        return $this->belongsToMany(User::class,'email_to_user','email_id','user_id')
+            ->withPivot('status');
     }
 }

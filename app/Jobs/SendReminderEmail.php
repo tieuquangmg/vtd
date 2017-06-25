@@ -8,6 +8,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class SendReminderEmail implements ShouldQueue
@@ -19,11 +20,13 @@ class SendReminderEmail implements ShouldQueue
      *
      * @return void
      */
-    public $user,$data ;
-    public function __construct($user,$data)
+    public $user, $data,$user_from,$user_email;
+    public function __construct($user,$data,$user_from,$user_email)
     {
         $this->user = $user;
         $this->data = $data;
+        $this->user_from = $user_from;
+        $this->user_email = $user_email;
     }
 
     /**
@@ -33,6 +36,10 @@ class SendReminderEmail implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to($this->user->email)->send(new SendMail($this->user,$this->data));
+//        Mail::to($this->user->email)
+//            ->send(new SendMail($this->user,$this->data,$this->user_from));
+        $this->user_email->email_to_user()->pivot->status = 1;
+        $this->user_email->email_to_user()->pivot->save();
+        Log::info("update trang thai thanh cong");
     }
 }

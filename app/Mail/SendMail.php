@@ -17,11 +17,12 @@ class SendMail extends Mailable
      *
      * @return void
      */
-    public $data,$user;
-    public function __construct($user,$data)
+    public $data,$user,$user_send;
+    public function __construct($user,$data,$user_send)
     {
         $this->user = $user;
         $this->data = $data;
+        $this->user_send = $user_send;
     }
 
     /**
@@ -32,7 +33,8 @@ class SendMail extends Mailable
     public function build()
     {
 //        dd($this->data);
-        return $this->from(Auth::user()->email)
+        return $this
+            ->from($this->user_send)
             ->view('emails.send_to_user')
 //            ->subject($this->data['subject'])
             ;

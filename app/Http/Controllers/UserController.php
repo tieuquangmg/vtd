@@ -10,6 +10,7 @@ use App\Mail\News;
 use App\Mail\SendMail;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\User_email;
 use App\Models\UserEmployeeType;
 use App\Models\UserRank;
 use App\Models\UserStatus;
@@ -250,10 +251,23 @@ class UserController extends AppBaseController
     public function postSendEmail(Request $request){
 	    $data = $request->all();
         $users = User::whereIn('id',$data['email_to_user_id'])->get();
+
+        $user_email = new User_email();
+        $user_email->user_id = $data['user_id'];
+        $user_email->content = $data['content'];
+        $user_email->status = $data['status'];
+        $user_email->save();
+        $user_email->email_to_user()->attach($data['email_to_user_id']);
+
+        dd($user_email->email_to_user);
+
+        $user_email->email_to_user()->pivot->status = 1;
+        $user_email>email_to_user()->pivot->save();
+
         foreach ($users as $user) {
             if ($user->email != null) {
-                 $job = (new SendReminderEmail($user, $data))
-                            ->delay(Carbon::now()->addMinutes(1));
+                 $job = (new SendReminderEmail($user, $data,Auth::user()->email,$user_email))
+                            ->delay(Carbon::now()->addSeconds(15));
                 dispatch($job);
 			}
         }

@@ -12,7 +12,8 @@
 */
 
 Route::get('/', function () {
-    dd(\App\Models\User_email::first()->email_to_user);
+//    dd(Auth::user()->email);
+    //dd(\App\Models\User_email::first()->email_to_user);
 //	$user = \App\User::find(3);
 //	$roles = [1, 2, 3]; // Using an array of ids
 //	$user->attachRole($roles);
