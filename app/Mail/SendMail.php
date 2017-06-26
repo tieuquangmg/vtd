@@ -32,6 +32,7 @@ class SendMail extends Mailable
      */
     public function build()
     {
+	    Log::info("gui email ".$this->user->full_name);
 //        dd($this->data);
         return $this
             ->from($this->user_send)

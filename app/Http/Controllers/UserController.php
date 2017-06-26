@@ -259,15 +259,15 @@ class UserController extends AppBaseController
         $user_email->save();
         $user_email->email_to_user()->attach($data['email_to_user_id']);
 
-        dd($user_email->email_to_user);
-
-        $user_email->email_to_user()->pivot->status = 1;
-        $user_email>email_to_user()->pivot->save();
+		foreach ($user_email->email_to_user as $email_to_user){
+			$email_to_user->pivot->status = 0;
+			$email_to_user->pivot->save();
+		}
 
         foreach ($users as $user) {
             if ($user->email != null) {
-                 $job = (new SendReminderEmail($user, $data,Auth::user()->email,$user_email))
-                            ->delay(Carbon::now()->addSeconds(15));
+                 $job = (new SendReminderEmail($user, $data,Auth::user(),$user_email))
+                            ->delay(Carbon::now()->addSeconds(30));
                 dispatch($job);
 			}
         }

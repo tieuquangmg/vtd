@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Mail\SendMail;
+use App\Models\Email_to_user;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -36,10 +37,11 @@ class SendReminderEmail implements ShouldQueue
      */
     public function handle()
     {
-//        Mail::to($this->user->email)
-//            ->send(new SendMail($this->user,$this->data,$this->user_from));
-        $this->user_email->email_to_user()->pivot->status = 1;
-        $this->user_email->email_to_user()->pivot->save();
+        Mail::to($this->user->email)
+            ->queue(new SendMail($this->user,$this->data,$this->user_from));
+	    $update = Email_to_user::where('email_id',$this->user_email->id)->where('user_id',$this->user->id)->first();
+	    $update->status = 1;
+	    $update->save();
         Log::info("update trang thai thanh cong");
     }
 }
