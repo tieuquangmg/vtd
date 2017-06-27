@@ -23,7 +23,7 @@ class User extends Authenticatable
     const UPDATED_AT = 'updated_at';
 
 
-    protected $dates = ['start_date', 'deleted_at', 'contract_date_end'];
+    protected $dates = ['start_date','birthday', 'deleted_at', 'contract_date_end'];
 
     public $fillable = [
         'full_name',
@@ -129,15 +129,24 @@ class User extends Authenticatable
         return $this->hasMany(UserLeave::class, 'user_id', 'id');
     }
 
-    public function getCountById()
+    public function getCountById($year_id)
     {
-        $userLeaves = UserLeave::where('user_id', $this->id)->get();
+	    $absence = Absence::where('user_id', $this->id)->get();
         $data = ['total' => 0, 'take' => 0, 'balance' => 0];
-        foreach ($userLeaves as $item) {
-            $data['total'] += $item->total_leave;
-            $data['take'] += $item->taken_leave;
+        foreach ($absence as $item) {
+        	if($item->absence_status_id == 1 || $item->absence_status_id == 2){
+		        $data['take'] += $item->days;
+	        }
         }
-        $data['balance'] = $data['total'] - $data['take'];
+	    $absence_type = AbsenceType::all()->pluck('id')->toArray();
+	    $userLeaves = UserLeave::where('user_id', $this->id)
+		    ->where('year_id',$year_id)
+		    ->whereIn('absence_type_id',$absence_type)
+		    ->get();
+	    foreach ($userLeaves as $row){
+		    $data['total'] += $row->total_leave;
+	    }
+	    $data['balance'] = $data['total'] - $data['take'];
         return $data;
     }
 }

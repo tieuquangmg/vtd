@@ -1,3 +1,4 @@
+@is(['member'])
 <li class="treeview <?php if (Request::is('users*') or Request::is('addUser*') or Request::is('userEmployeeTypes*') or Request::is('userRanks*') or Request::is('userStatuses*')) echo "active"; ?>">
     <a href="http://wiki.vtdvn.net/">
         <i class="fa fa-dashboard"></i>
@@ -10,6 +11,8 @@
         <span>Forum</span>
     </a>
 </li>
+@endis
+@is(['admin'])
 <li class="treeview <?php if (Request::is('doccuments*') or Request::is('doccumentServes')) echo "active"; ?>">
     <a href="#">
         <i class="fa fa-dashboard"></i>
@@ -30,7 +33,9 @@
         </li>
     </ul>
 </li>
-<li class="treeview <?php if (Request::is('users*') or Request::is('addUser*') or Request::is('userEmployeeTypes*') or Request::is('userRanks*') or Request::is('userStatuses*')) echo "active"; ?>">
+@endis
+@is(['admin'])
+    <li class="treeview <?php if (Request::is('users*') or Request::is('addUser*') or Request::is('userEmployeeTypes*') or Request::is('userRanks*') or Request::is('userStatuses*')) echo "active"; ?>">
     <a href="#">
         <i class="fa fa-dashboard"></i>
         <span>Quản lý tài khoản</span>
@@ -63,6 +68,12 @@
         </li>
     </ul>
 </li>
+@else
+    <li class="{{ Request::is('users*') ? 'active' : '' }}">
+        <a href="{!! route('users.show', [Auth::user()->id]) !!}"><i class="fa fa-edit"></i><span>Thông tin cá nhân</span></a>
+    </li>
+@endis
+    @is(['admin'])
 <li class="treeview <?php if (Request::is('devices*') or Request::is('devices/create*') or Request::is('deviceStatuses*') or Request::is('deviceSuppliers*') or Request::is('deviceBrands*')) echo "active"; ?>">
     <a href="#">
         <i class="fa fa-dashboard"></i>
@@ -123,6 +134,8 @@
         </li>
     </ul>
 </li>
+    @endis
+    @is(['admin'])
 <li class="treeview <?php if (Request::is('absences/create*') or Request::is('absences') or Request::is('absenceTypes*') or Request::is('absenceStatuses*') or Request::is('userDetails*') or Request::is('years*')) echo "active"; ?>">
     <a href="#">
         <i class="fa fa-dashboard"></i>
@@ -156,6 +169,32 @@
         </li>
     </ul>
 </li>
-<li class="{{ Request::is('roles*') ? 'active' : '' }}">
+    @endis
+    @is(['member'])
+    <li class="treeview <?php if (Request::is('showmemberLeaves*') or Request::is('absences/all/member*') or Request::is('absences/create/member*')) echo "active"; ?>">
+        <a href="#">
+            <i class="fa fa-dashboard"></i>
+            <span>Quản lý Nghỉ phép</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+        </span>
+        </a>
+        <ul class="treeview-menu">
+            <li class="{{ Request::is('absences/create/member*') ? 'active' : '' }}">
+                <a href="{!! route('absences.membercreate') !!}"><i class="fa fa-edit"></i><span>Đăng ký mới</span></a>
+            </li>
+            <li class="{{ Request::is('absences/all/member*') ? 'active' : '' }}">
+                <a href="{!! route('absences.all.member') !!}"><i class="fa fa-edit"></i><span>Danh sách đơn xin nghỉ</span></a>
+            </li>
+            <li class="{{ Request::is('userDetails*') ? 'active' : '' }}">
+                <a href="{!! route('member.leaves.detail') !!}"><i class="fa fa-edit"></i><span>Thống kê</span></a>
+            </li>
+        </ul>
+    </li>
+
+    @endis
+    @is(['admin'])
+    <li class="{{ Request::is('roles*') ? 'active' : '' }}">
     <a href="{!! route('roles.index') !!}"><i class="fa fa-edit"></i><span>Roles</span></a>
-</li>
+    </li>
+    @endis

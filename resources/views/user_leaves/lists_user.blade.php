@@ -29,9 +29,9 @@
 					@foreach($users as $user)
 						<tr>
 							<td>{!! $user->full_name !!}</td>
-							<td>{!! $user->getCountById()['total'] !!}</td>
-							<td>{!! $user->getCountById()['take'] !!}</td>
-							<td>{!! $user->getCountById()['balance'] !!}</td>
+							<td>{!! $user->getCountById(1)['total'] !!}</td>
+							<td>{!! $user->getCountById(1)['take'] !!}</td>
+							<td>{!! $user->getCountById(1)['balance'] !!}</td>
 							<td><a href="{{route('user.leaves.detail',$user->id)}}">Chi tiết</a></td>
 						</tr>
 					@endforeach

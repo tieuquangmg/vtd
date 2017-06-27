@@ -99,7 +99,7 @@
             <div class="input-group-addon">
                 <i class="fa fa-calendar"></i>
             </div>
-            {!! Form::text('birthday', (Request::is('*edit') && $user->birthday != null)? $user->birthday->format('d/m/Y') : null, ['class' => 'form-control datepicker','id'=>'datepicker']) !!}
+            {!! Form::text('birthday', (Request::is('*edit') && $user->birthday != null) ? $user->birthday->format('d/m/Y') : null, ['class' => 'form-control datepicker','id'=>'datepicker']) !!}
         </div>
     </div>
     {{--so cmt--}}

@@ -40,9 +40,14 @@ class UserLeaveController extends AppBaseController
         return view('user_leaves.index')
             ->with('userLeaves', $userLeaves);
     }
+
 	public function userLeavesDetail($id){
 		$userLeaves['userLeaves'] = $this->userLeaveRepository->findWhere(['user_id'=>$id,'year_id'=>1]);
     	return view('user_leaves.index')->with($userLeaves);
+	}
+	public function memberLeavesDetail(){
+		$userLeaves['userLeaves'] = $this->userLeaveRepository->findWhere(['year_id'=>1]);
+		return view('user_leaves.member-index')->with($userLeaves);
 	}
     /**
      * Show the form for creating a new UserLeave.

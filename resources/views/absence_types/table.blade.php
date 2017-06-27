@@ -1,12 +1,16 @@
 <table class="table table-responsive" id="absenceTypes-table">
     <thead>
-        <th>Absence Type Name</th>
+    <tr>
+        <th>Loại nghỉ phép</th>
+        <th>Số buổi</th>
         <th colspan="3">Action</th>
+    </tr>
     </thead>
     <tbody>
     @foreach($absenceTypes as $absenceType)
         <tr>
             <td>{!! $absenceType->absence_type_name !!}</td>
+            <td>{!! $absenceType->total !!}</td>
             <td>
                 {!! Form::open(['route' => ['absenceTypes.destroy', $absenceType->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

@@ -24,7 +24,7 @@ class AbsenceType extends Model
 
 
     public $fillable = [
-        'absence_type_name'
+        'absence_type_name','total'
     ];
 
     /**

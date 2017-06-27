@@ -12,11 +12,8 @@
 */
 
 Route::get('/', function () {
-//    dd(Auth::user()->email);
-    //dd(\App\Models\User_email::first()->email_to_user);
-//	$user = \App\User::find(3);
-//	$roles = [1, 2, 3]; // Using an array of ids
-//	$user->attachRole($roles);
+	$year = \App\Models\Year::where('slug',\Carbon\Carbon::now()->year)->first();
+	dd($year);
 	return view('welcome');
 });
 
@@ -44,6 +41,10 @@ Route::resource('users', 'UserController');
 
 Route::resource('absences', 'AbsenceController');
 
+Route::get('absences/create/member','AbsenceController@getMemberCreate')->name('absences.membercreate');
+Route::get('absences/all/member','AbsenceController@getMyAbsences')->name('absences.all.member');
+
+
 Route::resource('absenceTypes', 'AbsenceTypeController');
 
 Route::resource('absenceStatuses', 'AbsenceStatusController');
@@ -54,11 +55,11 @@ Route::resource('years', 'YearController');
 
 Route::get('userDetails','UserLeaveController@getDetail')->name('userdetails.leave');
 Route::get('showuserLeaves/{id}','UserLeaveController@userLeavesDetail')->name('user.leaves.detail');
+Route::get('showmemberLeaves','UserLeaveController@memberLeavesDetail')->name('member.leaves.detail');
 
 Route::get('devicesExport','DeviceController@getExport')->name('devices.export');
 
 Route::post('user/export-excel','UserController@postExportExcel')->name('users.export');
-
 
 
 Route::get('sendemail', function () {

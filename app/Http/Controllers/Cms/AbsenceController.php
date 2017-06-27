@@ -10,6 +10,7 @@ use App\Http\Controllers\AppBaseController;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\Auth;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 
@@ -34,10 +35,17 @@ class AbsenceController extends AppBaseController
         $this->absenceRepository->pushCriteria(new RequestCriteria($request));
         $absences = $this->absenceRepository->all();
 
-        return view('absences.index')
-            ->with('absences', $absences);
+        return view('absences.index')->with('absences', $absences);
     }
+	public function getMyAbsences(Request $request)
+	{
+		session()->flash('back_url', 'absences.all.member');
+		$this->absenceRepository->pushCriteria(new RequestCriteria($request));
+		$absences = $this->absenceRepository->findWhere(['user_id'=>Auth::user()->id]);
 
+		return view('absences.member-index')
+			->with('absences', $absences);
+	}
     /**
      * Show the form for creating a new Absence.
      *
@@ -49,6 +57,10 @@ class AbsenceController extends AppBaseController
         return view('absences.create')->with($data);
     }
 
+    public function getMemberCreate(){
+	    $data['userList'] = User::pluck('full_name','id');
+	    return view('absences.member-create')->with($data);
+    }
     /**
      * Store a newly created Absence in storage.
      *
@@ -88,7 +100,6 @@ class AbsenceController extends AppBaseController
 
         return view('absences.show')->with('absence', $absence);
     }
-
     /**
      * Show the form for editing the specified Absence.
      *
@@ -147,15 +158,18 @@ class AbsenceController extends AppBaseController
         $absence = $this->absenceRepository->findWithoutFail($id);
 
         if (empty($absence)) {
-            Flash::error('Absence not found');
+            Flash::error('Đơn không tồn tại');
 
-            return redirect(route('absences.index'));
+            return redirect(route('absences.all.member'));
         }
-
+		if(($absence->absence_status_id == 2 || $absence->absence_status_id == 3) && $absence->start_date > Carbon::now()){
+			Flash::error('Không thể hủy đơn');
+			return redirect(route(session('back_url')));
+		}
         $this->absenceRepository->delete($id);
 
         Flash::success('Absence deleted successfully.');
 
-        return redirect(route('absences.index'));
+        return redirect(route('absences.all.member'));
     }
 }

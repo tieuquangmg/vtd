@@ -31,9 +31,7 @@ class AbsenceTypeController extends AppBaseController
     {
         $this->absenceTypeRepository->pushCriteria(new RequestCriteria($request));
         $absenceTypes = $this->absenceTypeRepository->all();
-
-        return view('absence_types.index')
-            ->with('absenceTypes', $absenceTypes);
+        return view('absence_types.index')->with('absenceTypes', $absenceTypes);
     }
 
     /**

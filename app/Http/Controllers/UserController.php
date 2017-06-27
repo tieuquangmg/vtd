@@ -190,7 +190,6 @@ class UserController extends AppBaseController
 
         $user = $this->userRepository->update($input, $id);
         Flash::success('Tài khoản đã được cập nhật');
-        event(new UserCreated($user->id));
         return redirect(route('users.index'));
     }
 
