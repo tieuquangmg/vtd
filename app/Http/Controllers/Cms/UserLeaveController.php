@@ -9,6 +9,7 @@ use App\Repositories\UserLeaveRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\Auth;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 
@@ -43,10 +44,11 @@ class UserLeaveController extends AppBaseController
 
 	public function userLeavesDetail($id){
 		$userLeaves['userLeaves'] = $this->userLeaveRepository->findWhere(['user_id'=>$id,'year_id'=>1]);
+
     	return view('user_leaves.index')->with($userLeaves);
 	}
 	public function memberLeavesDetail(){
-		$userLeaves['userLeaves'] = $this->userLeaveRepository->findWhere(['year_id'=>1]);
+		$userLeaves['userLeaves'] = $this->userLeaveRepository->findWhere(['user_id'=>Auth::user()->id,'year_id'=>1]);
 		return view('user_leaves.member-index')->with($userLeaves);
 	}
     /**

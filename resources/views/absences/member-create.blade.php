@@ -14,10 +14,7 @@
 				{!! Form::open(['route' => 'absences.store']) !!}
 
 				<!-- User Id Field -->
-					<div class="form-group col-sm-6">
-						{!! Form::label('user_id', 'Nhân viên: '.Auth::user()->full_name) !!}
-						{!! Form::hidden('user_id',Auth::user()->id, ['class' => 'form-control'])!!}
-					</div>
+				{!! Form::hidden('user_id',Auth::user()->id, ['class' => 'form-control'])!!}
 
 					<!-- Start Date Field -->
 					<div class="form-group col-sm-6">

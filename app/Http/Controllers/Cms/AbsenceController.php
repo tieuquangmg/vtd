@@ -58,6 +58,7 @@ class AbsenceController extends AppBaseController
     }
 
     public function getMemberCreate(){
+        session()->flash('back-url',"absences.all.member");
 	    $data['userList'] = User::pluck('full_name','id');
 	    return view('absences.member-create')->with($data);
     }
@@ -76,9 +77,9 @@ class AbsenceController extends AppBaseController
 
         $absence = $this->absenceRepository->create($input);
 
-        Flash::success('Absence saved successfully.');
+        Flash::success('Đăng ký nghỉ phép thành công');
 
-        return redirect(route('absences.index'));
+        return redirect(route(session('back-url')));
     }
 
     /**
@@ -93,7 +94,7 @@ class AbsenceController extends AppBaseController
         $absence = $this->absenceRepository->findWithoutFail($id);
 
         if (empty($absence)) {
-            Flash::error('Đơn xin not found');
+            Flash::error('Đơn xin không tồn tại');
 
             return redirect(route('absences.index'));
         }
