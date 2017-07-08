@@ -15,9 +15,12 @@
 
 				<!-- User Id Field -->
 				{!! Form::hidden('user_id',Auth::user()->id, ['class' => 'form-control'])!!}
-
+					<div class="form-group col-sm-4">
+						{!! Form::label('absence_type_id', 'Loại Nghỉ phép: ') !!}
+						{!! Form::select('absence_type_id',$absence ,old('absence_type_id'), ['class' => 'form-control']) !!}
+					</div>
 					<!-- Start Date Field -->
-					<div class="form-group col-sm-6">
+					<div class="form-group col-sm-4">
 						{!! Form::label('start_date', 'Ngày bắt đầu:') !!}
 						<div class="input-group date">
 							<div class="input-group-addon">
@@ -27,7 +30,7 @@
 						</div>
 					</div>
 					<!-- Days Field -->
-					<div class="form-group col-sm-6">
+					<div class="form-group col-sm-4">
 						{!! Form::label('days', 'Số ngày:') !!}
 						{!! Form::number('days', null, ['class' => 'form-control']) !!}
 					</div>

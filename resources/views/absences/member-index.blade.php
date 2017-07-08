@@ -19,10 +19,11 @@
                     <thead>
                     <tr>
                         <th>Ngày bắt đầu</th>
+                        <th>Loại nghỉ phép</th>
                         <th>Số ngày</th>
-                        <th>Người phê duyệt</th>
-                        <th>Trạng thái</th>
                         <th>Ghi chú</th>
+                        <th>Trạng thái</th>
+                        <th>Người phê duyệt</th>
                         <th>Người phê duyệt note</th>
                         <th colspan="3">Hành động</th>
                     </tr>
@@ -31,10 +32,11 @@
                     @foreach($absences as $absence)
                         <tr>
                             <td>{!! $absence->start_date->format('d/m/Y') !!}</td>
+                            <td>{!! $absence->AbsenceType->absence_type_name !!}</td>
                             <td>{!! $absence->days !!}</td>
-                            <td>{!! ($absence->user_approval != null)?($absence->user_approval->full_name):'' !!}</td>
-                            <td>{!! $absence->status->absence_status_name !!}</td>
                             <td>{!! $absence->user_note !!}</td>
+                            <td>{!! $absence->status->absence_status_name !!}</td>
+                            <td>{!! ($absence->user_approval != null)?($absence->user_approval->full_name):'' !!}</td>
                             <td>{!! $absence->approval_note !!}</td>
                             <td>
                                 {!! Form::open(['route' => ['absences.destroy', $absence->id], 'method' => 'delete']) !!}

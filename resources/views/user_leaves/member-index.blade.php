@@ -16,20 +16,22 @@
             <div class="box-body">
                 <table class="table table-responsive" id="userLeaves-table">
                     <thead>
-                    <th>Loại nghỉ phép</th>
-                    <th>Năm</th>
-                    <th>Tổng</th>
-                    <th>Đã nghỉ</th>
-                    <th>Còn lại</th>
+                    <tr>
+                        <th>Loại nghỉ phép</th>
+                        <th>Năm</th>
+                        <th>Tổng</th>
+                        <th>Đã nghỉ</th>
+                        <th>Còn lại</th>
+                    </tr>
                     </thead>
                     <tbody>
-                    @foreach($userLeaves as $userLeave)
+                    @foreach($data as $row)
                         <tr>
-                            <td>{!! $userLeave->absencetype->absence_type_name !!}</td>
-                            <td>{!! $userLeave->year->year_name !!}</td>
-                            <td>{!! $userLeave->total_leave !!}</td>
-                            <td>{!! $userLeave->taken_leave !!}</td>
-                            <td>{!! $userLeave->balance_leave !!}</td>
+                            <td>{!! $row['total']->absencetype->absence_type_name !!}</td>
+                            <td>{!! $row['total']->year->year_name !!}</td>
+                            <td>{!! $row['total']->total_leave !!}</td>
+                            <td>{!! $row['taked'] !!}</td>
+                            <td>{!! $row['balance'] !!}</td>
                             <td>
                                 {{--{!! Form::open(['route' => ['userLeaves.destroy', $userLeave->id], 'method' => 'delete']) !!}--}}
                                 {{--<div class='btn-group'>--}}

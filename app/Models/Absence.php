@@ -3,6 +3,7 @@
 namespace App\Models;
 
 //use Eloquent as Model;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -16,6 +17,7 @@ class Absence extends Model
     use SoftDeletes;
 
     public $table = 'absence';
+
     
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
@@ -27,6 +29,7 @@ class Absence extends Model
     public $fillable = [
         'user_id',
         'start_date',
+        'absence_type_id',
         'days',
         'user_approval_id',
         'absence_status_id',
@@ -55,8 +58,10 @@ class Absence extends Model
      *
      * @var array
      */
+
     public static $rules = [
-        
+        'start_date'=> 'required',
+        'days'=>'required|numeric|min:1|max:30'
     ];
     public function user_approval(){
     	return $this->belongsTo(User::class,'user_approval_id','id');
@@ -69,5 +74,12 @@ class Absence extends Model
     	return $this->belongsTo(AbsenceStatus::class,'absence_status_id','id');
     }
 
+    public function AbsenceType(){
+        return $this->belongsTo(AbsenceType::class,'absence_type_id','id');
+    }
+
+    public  function getTotalByType($user,$absence_type_id){
+
+    }
     
 }

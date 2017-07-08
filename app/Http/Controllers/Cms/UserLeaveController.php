@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUserLeaveRequest;
 use App\Http\Requests\UpdateUserLeaveRequest;
+use App\Models\Absence;
 use App\Models\User;
+use App\Models\UserLeave;
 use App\Repositories\UserLeaveRepository;
 use App\Http\Controllers\AppBaseController;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Flash;
 use Illuminate\Support\Facades\Auth;
@@ -48,8 +51,29 @@ class UserLeaveController extends AppBaseController
     	return view('user_leaves.index')->with($userLeaves);
 	}
 	public function memberLeavesDetail(){
-		$userLeaves['userLeaves'] = $this->userLeaveRepository->findWhere(['user_id'=>Auth::user()->id,'year_id'=>1]);
-		return view('user_leaves.member-index')->with($userLeaves);
+	    $data = [];
+//		$userLeaves['userLeaves'] = $this->userLeaveRepository->findWhere(['user_id'=>Auth::user()->id,'year_id'=>1]);
+        $all_abseces =  UserLeave::where('user_id',Auth::user()->id)
+            ->get();
+        $i = 0;
+
+        foreach ($all_abseces as $row){
+		    $data[$i]['total'] = $row;
+            $all_abseces =  Absence::where('user_id',Auth::user()->id)
+                ->whereYear('start_date',Carbon::now()->year)
+                ->where('absence_type_id',$row->absence_type_id)
+                ->whereIn('absence_status_id',[1,2])
+                ->get();
+            $total = 0;
+            foreach ($all_abseces as $row1){
+                $total += $row1['days'];
+            }
+		    $data[$i]['taked'] = $total;
+            $data[$i]['balance'] = $row->total_leave - $total;
+            $i ++;
+        }
+        $data1['data'] = $data;
+		return view('user_leaves.member-index')->with($data1);
 	}
     /**
      * Show the form for creating a new UserLeave.

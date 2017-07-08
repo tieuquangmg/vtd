@@ -18,6 +18,7 @@ use App\Repositories\BankRepository;
 use App\Repositories\UserRepository;
 use App\Http\Controllers\AppBaseController;
 use Carbon\Carbon;
+use Doctrine\Common\Cache\Cache;
 use Illuminate\Http\Request;
 use Flash;
 use Illuminate\Support\Collection;
@@ -272,5 +273,20 @@ class UserController extends AppBaseController
         }
         Flash::success('Mail đã được gửi đi');
         return redirect()->route('users.index');
+    }
+
+    public function getRanromuser(){
+        $arrsyUser = Cache::get('userAraray');
+        $users = \App\User::whereNotIn('id',$arrsyUser);
+
+        $data['img'] = json_encode($users->pluck('avatar')->toArray());
+        $data['full_name'] = json_encode($users->pluck('full_name')->toArray());
+        $data['user_id'] = json_encode($users->pluck('id')->toArray());
+        return view('frontend.ranrom_user')->with($data);
+    }
+
+    public function postRanromuser(Request $request){
+        Cache::forever('userAraray', $request);
+        return true;
     }
 }

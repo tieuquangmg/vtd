@@ -1,3 +1,7 @@
+
+<li class="{{ Request::is('randrom-user*') ? 'active' : '' }}">
+    <a href="{!! route('users.ranrom-users') !!}"><i class="fa fa-edit"></i><span>Random</span></a>
+</li>
 @is(['member'])
 <li class="treeview <?php if (Request::is('users*') or Request::is('addUser*') or Request::is('userEmployeeTypes*') or Request::is('userRanks*') or Request::is('userStatuses*')) echo "active"; ?>">
     <a href="http://wiki.vtdvn.net/">

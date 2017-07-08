@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
 	$year = \App\Models\Year::where('slug',\Carbon\Carbon::now()->year)->first();
-	dd($year);
+//	dd($year);
 	return view('welcome');
 });
 
@@ -84,3 +84,6 @@ Route::resource('deviceSuppliers', 'Device_supplierController');
 	Route::resource('doccuments', 'DoccumentsController');
 	Route::resource('doccumentServes', 'Doccument_serveController');
 	Route::resource('userEmails', 'User_emailController');
+Route::get('randrom-user','UserController@getRanromuser')->name('users.ranrom-users');
+
+Route::post('randrom-user','UserController@postRanromuser')->name('users.ranrom-users');
