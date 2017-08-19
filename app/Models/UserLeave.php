@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -63,5 +64,13 @@ class UserLeave extends \Illuminate\Database\Eloquent\Model
     }
     public function user(){
     	return $this->belongsTo(User::class,'user_id','id');
+    }
+    public function gettaked(){
+        $taked = Absence::where('absence_type_id',$this->absence_type_id)
+                        ->where('user_id',$this->user_id)
+                        ->whereYear('start_date',Carbon::now()->year)
+                        ->whereIn('absence_status_id',[1,2])
+                        ->get();
+        return count($taked);
     }
 }

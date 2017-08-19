@@ -11,11 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-	$year = \App\Models\Year::where('slug',\Carbon\Carbon::now()->year)->first();
-	dd($year);
-	return view('welcome');
-});
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/contact', 'HomeController@contact');
+Route::get('about', 'HomeController@about')->name('home');
+Route::get('projects', 'HomeController@projects')->name('home');
+Route::get('services', 'HomeController@services')->name('home');
 
 Auth::routes();
 
@@ -84,3 +84,6 @@ Route::resource('deviceSuppliers', 'Device_supplierController');
 	Route::resource('doccuments', 'DoccumentsController');
 	Route::resource('doccumentServes', 'Doccument_serveController');
 	Route::resource('userEmails', 'User_emailController');
+Route::get('randrom-user','UserController@getRanromuser')->name('users.ranrom-users');
+
+Route::post('randrom-user','UserController@postRanromuser')->name('users.ranrom-users');

@@ -372,10 +372,11 @@
 
 <script src="{{asset("/")}}js/check_all.js"></script>
 <script>
-	$(function () {
+	$(function (){
 		$('.datepicker').datepicker({
 			autoclose: true,
-			language: 'vi-VN'
+			language: 'vi-VN',
+            startDate: 'today'
 		});
 	});
 </script>
