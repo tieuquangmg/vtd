@@ -12,10 +12,10 @@
 */
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/contact', 'HomeController@contact');
-Route::get('about', 'HomeController@about')->name('home');
-Route::get('projects', 'HomeController@projects')->name('home');
-Route::get('services', 'HomeController@services')->name('home');
+Route::get('/contact', 'HomeController@contact')->name('contact');
+Route::get('about', 'HomeController@about')->name('about');
+Route::get('projects', 'HomeController@projects')->name('projects');
+Route::get('services', 'HomeController@services')->name('services');
 
 Auth::routes();
 

@@ -2,14 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>株式会社VTD</title>
+    @yield('title')
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="" />
     <meta name="author" content="http://vtdvn.net" />
     <!-- css -->
     <link href="{{asset('/')}}css/bootstrap.min.css" rel="stylesheet" />
     <link href="{{asset('/')}}css/fancybox/jquery.fancybox.css" rel="stylesheet">
-    <link href="{{asset('/')}}css/jcarousel.css" rel="stylesheet" />
     <link href="{{asset('/')}}css/flexslider.css" rel="stylesheet" />
     <!-- Vendor Styles -->
     <link href="{{asset('/')}}css/magnific-popup.css" rel="stylesheet">
@@ -34,6 +33,36 @@
             </div>
         </div>
     </div>
+    <header>
+        <div class="navbar navbar-default navbar-static-top menu-cus">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{{asset('/')}}"><img src="{{asset('/')}}img/logo.png" alt="logo"/></a>
+                </div>
+                <div class="navbar-collapse collapse ">
+                    <ul class="nav navbar-nav">
+                        <li class="{{ Request::is('/') ? 'active' : '' }}"><a href="{{asset('/')}}">ホーム</a></li>
+                        <li class="dropdown">
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle">会社概要<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li class="{{ Request::is('about') ? 'active' : '' }}"><a href="{{route('about')}}">Company</a></li>
+                                <li class="{{ Request::is('about') ? 'active' : '' }}"><a href="{{route('about')}}">Our Team</a></li>
+                            </ul>
+                        </li>
+                        <li class="{{ Request::is('services') ? 'active' : '' }}"><a href="{{route('services')}}">サービス</a></li>
+                        <li class="{{ Request::is('projects') ? 'active' : '' }}"><a href="{{route('projects')}}">プロジェクト</a></li>
+                        <li ><a href="#">遺物</a></li>
+                        <li class="{{ Request::is('contact') ? 'active' : '' }}"><a href="{{route('contact')}}">お問合わせ</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
     @yield('content')
     <footer>
         <div id="sub-footer">
@@ -62,21 +91,21 @@
 <!-- javascript
     ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="js/jquery.js"></script>
-<script src="js/jquery.easing.1.3.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.fancybox.pack.js"></script>
-<script src="js/jquery.fancybox-media.js"></script>
-<script src="js/jquery.flexslider.js"></script>
-<script src="js/animate.js"></script>
+<script src="{{asset('/')}}js/jquery.js"></script>
+<script src="{{asset('/')}}js/jquery.easing.1.3.js"></script>
+<script src="{{asset('/')}}js/bootstrap.min.js"></script>
+<script src="{{asset('/')}}js/jquery.fancybox.pack.js"></script>
+<script src="{{asset('/')}}js/jquery.fancybox-media.js"></script>
+<script src="{{asset('/')}}js/jquery.flexslider.js"></script>
+<script src="{{asset('/')}}js/animate.js"></script>
 <!-- Vendor Scripts -->
-<script src="js/modernizr.custom.js"></script>
-<script src="js/jquery.isotope.min.js"></script>
-<script src="js/jquery.magnific-popup.min.js"></script>
-<script src="js/animate.js"></script>
-<script src="js/custom.js"></script>
-<script src="js/owl-carousel/owl.carousel.js"></script>
-@yield('foot')
+<script src="{{asset('/')}}js/modernizr.custom.js"></script>
+<script src="{{asset('/')}}js/jquery.isotope.min.js"></script>
+<script src="{{asset('/')}}js/jquery.magnific-popup.min.js"></script>
+<script src="{{asset('/')}}js/animate.js"></script>
+<script src="{{asset('/')}}js/custom.js"></script>
+<script src="{{asset('/')}}js/owl.carousel.min.js"></script>
+@yield('js')
 </body>
 </html>
 <!-- Localized -->

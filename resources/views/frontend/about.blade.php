@@ -2,39 +2,10 @@
 @section('head')
 
 @endsection
-
+@section('title')
+    <title>株式会社VTD</title>
+    @endsection
 @section('content')
-    <!-- start header -->
-    <header>
-        <div class="navbar navbar-default navbar-static-top menu-cus">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="index.html"><img src="img/logo.png" alt="logo"/></a>
-                </div>
-                <div class="navbar-collapse collapse ">
-                    <ul class="nav navbar-nav">
-                        <li><a href="index.html">ホーム</a></li>
-                        <li class="dropdown active">
-                            <a href="#" data-toggle="dropdown" class="dropdown-toggle">会社概要<b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="about.html">Company</a></li>
-                                <li><a href="#">Our Team</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="services.html">サービス</a></li>
-                        <li><a href="projects.html">プロジェクト</a></li>
-                        <li><a href="#">遺物</a></li>
-                        <li><a href="contact.html">お問合わせ</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </header>
     <!-- end header -->
     <section id="inner-headline" class="header-cus">
         <div class="container">
@@ -511,6 +482,6 @@
     </section>
 @endsection
 
-@section('foot')
+@section('js')
 
 @endsection
