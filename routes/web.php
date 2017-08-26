@@ -87,3 +87,9 @@ Route::resource('deviceSuppliers', 'Device_supplierController');
 Route::get('randrom-user','UserController@getRanromuser')->name('users.ranrom-users');
 
 Route::post('randrom-user','UserController@postRanromuser')->name('users.ranrom-users');
+
+$api = app('Dingo\Api\Routing\Router');
+
+$api->version("v1", function ($api){
+	$api->get("hello",'App\Http\Controllers\ApiController@getAllUsers');
+});

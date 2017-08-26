@@ -184,6 +184,8 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
 	    \Artesaos\Defender\Providers\DefenderServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+	    //dingo api
+	    Dingo\Api\Provider\LaravelServiceProvider::class,
     ],
 
     /*
@@ -238,5 +240,4 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 	    'Defender' => \Artesaos\Defender\Facades\Defender::class,
     ],
-
 ];
