@@ -186,6 +186,8 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
 	    //dingo api
 	    Dingo\Api\Provider\LaravelServiceProvider::class,
+	    //jwt
+	    Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class
     ],
 
     /*
@@ -239,5 +241,7 @@ return [
 	    'Flash'     => Laracasts\Flash\Flash::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 	    'Defender' => \Artesaos\Defender\Facades\Defender::class,
+		//jwt
+	    'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
     ],
 ];

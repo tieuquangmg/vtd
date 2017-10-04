@@ -24,10 +24,13 @@ use Flash;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Mail;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use Maatwebsite\Excel\Facades\Excel;
+use JWTAuthException;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class UserController extends AppBaseController
 {
@@ -289,4 +292,22 @@ class UserController extends AppBaseController
         Cache::forever('userAraray', $request);
         return true;
     }
+
+	public function login(Request $request){
+		$credentials = $request->only('name', 'password');
+		$token = null;
+		try {
+			if (!$token = JWTAuth::attempt($credentials)) {
+				return response()->json(['invalid_email_or_password'], 422);
+			}
+		} catch (JWTAuthException $e) {
+			return response()->json(['failed_to_create_token'], 500);
+		}
+		return response()->json(compact('token'));
+	}
+
+	public function getAuthUser(Request $request){
+		$user = JWTAuth::toUser($request->token);
+		return response()->json(['result' => $user]);
+	}
 }

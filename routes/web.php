@@ -10,6 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('test',function (){
+	return phpinfo();
+} );
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/contact', 'HomeController@contact')->name('contact');
@@ -87,9 +90,3 @@ Route::resource('deviceSuppliers', 'Device_supplierController');
 Route::get('randrom-user','UserController@getRanromuser')->name('users.ranrom-users');
 
 Route::post('randrom-user','UserController@postRanromuser')->name('users.ranrom-users');
-
-$api = app('Dingo\Api\Routing\Router');
-
-$api->version("v1", function ($api){
-	$api->get("hello",'App\Http\Controllers\ApiController@getAllUsers');
-});
